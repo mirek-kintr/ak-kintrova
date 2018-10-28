@@ -1,0 +1,21 @@
+RewriteEngine On
+
+# LANGUAGE REDIRECTS
+# ------------------
+RewriteCond %{HTTP:Accept-language} ^cs [NC]
+RewriteRule ^$ http://www.kintrlegal.cz/index.html [L,R=301]
+
+RewriteCond %{HTTP:Accept-language} ^en [NC]
+RewriteRule ^$ http://www.kintrlegal.cz/en.html [L,R=301]
+
+RewriteCond %{HTTP:Accept-language} ^de [NC]
+RewriteRule ^$ http://www.kintrlegal.cz/de.html [L,R=301]
+
+RewriteCond %{HTTP:Accept-language} !^(cs|de|en).* [NC]
+RewriteRule ^$ http://www.kintrlegal.cz/index.html [L,R=301]
+
+# HTTPS REDIRECTS
+RewriteBase /
+
+RewriteCond %{ENV:HTTPS} !^.*on
+RewriteRule ^(.*)$ https://www.kintrlegal.cz/$1 [R,L]
